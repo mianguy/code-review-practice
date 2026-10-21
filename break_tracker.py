@@ -1,17 +1,25 @@
-def f(x, y):
-    t = 0
-    for i in x:
-        t = t + i
-    a = t / len(x)
-    if a > y:
+SECONDS_PER_MINUTE = 60
+
+
+def check_average_break(break_lengths, goal_minutes):
+    """Compare the average break length to the user's goal."""
+    if not break_lengths:
+        return "No breaks logged yet"
+
+    average = sum(break_lengths) / len(break_lengths)
+
+    if average >= goal_minutes:
         return "Good job"
-    else:
-        return "Take more breaks"
+    return "Take more breaks"
 
-def calc(m):
-    s = m * 60
-    return s
 
-l = [5, 10, 15]
-print(f(l, 10))
-print(calc(5))
+def minutes_to_seconds(minutes):
+    """Convert break minutes to seconds for the timer."""
+    if minutes < 0:
+        raise ValueError("Minutes cannot be negative")
+    return minutes * SECONDS_PER_MINUTE
+
+
+break_lengths = [5, 10, 15]
+print(check_average_break(break_lengths, 10))
+print(minutes_to_seconds(5))
